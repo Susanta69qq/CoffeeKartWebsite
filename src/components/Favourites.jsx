@@ -393,7 +393,7 @@ function Favourites() {
           </div>
           <div className="favProducts pb-[20vh] overflow-hidden">
             <div
-              className="products flex gap-[1.5vw] px-[2vw] transition-transform duration-300 ease-in-out"
+              className="products flex gap-[2vw] px-[2vw] transition-transform duration-300 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}
             >
               {products.map((product, index) => (
