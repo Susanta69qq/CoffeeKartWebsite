@@ -97,3 +97,32 @@
 .button:hover {
   color: #FCF7E6;
 }
+
+.movingAnimation {
+  animation: moveLeft 30s linear infinite; /* Adjust the speed (20s) as needed */
+  flex-shrink: 0; /* Prevents the animation from shrinking the container */
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+@media (max-width: 640px) {
+  .movingAnimation {
+    animation: moveLeftMobile 30s linear infinite; /* Adjust speed for mobile */
+  }
+
+  @keyframes moveLeftMobile {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-400%); /* Move based on the content width */
+    }
+  }
+}
