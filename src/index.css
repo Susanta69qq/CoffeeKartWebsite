@@ -126,3 +126,43 @@
     }
   }
 }
+
+.link{
+  position: relative;
+}
+
+.link::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10%;
+  width: 0;
+  height: 1px;
+  background-color: #FCF7E6;
+  transition: width 0.5s ease, left 0.5s ease;
+}
+
+.link:hover::after{
+  width: 100%;
+  left: 0;
+}
+
+.impLink{
+  position: relative;
+}
+
+.impLink::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10%;
+  width: 0;
+  height: 1px;
+  background-color: #FCF7E6;
+  transition: width 0.5s ease, left 0.5s ease
+}
+
+.impLink:hover::after{
+  width: 100%;
+  left: 0;
+}

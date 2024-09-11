@@ -16,7 +16,7 @@ function VisitUs() {
   }, []);
 
   const mobileView = (
-    <div className="w-full min-h-screen px-[2vw] max-sm:mt-[5vh]">
+    <div className="w-full px-[2vw] max-sm:mt-[5vh]">
       <div className="imageContainer w-full flex justify-between gap-[2vw]">
         <div className="left">
           <img
