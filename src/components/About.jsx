@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-// import { gsap } from "gsap";
-// import { useGsap } from "@gsap/react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
-// gsap.registerPlugin(useGsap);
+gsap.registerPlugin(ScrollTrigger);
 
 function About() {
   const [showProducts, setShowProducts] = useState(true);
@@ -12,14 +12,7 @@ function About() {
   const [isMobile, setIsMobile] = useState(false);
 
   const headlineRef = useRef(null);
-
-  // useGsap(() => {
-  //   gsap.to(headlineRef.current, {
-  //     x: 100,
-  //     duration: 2,
-  //     delay: 0.5,
-  //   });
-  // }, []);
+  const productsRef = useRef(null);
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -31,6 +24,56 @@ function About() {
     window.addEventListener("resize", resizeHandler);
 
     return () => window.removeEventListener("resize", resizeHandler);
+  }, []);
+
+  useEffect(() => {
+    gsap.fromTo(
+      headlineRef.current.querySelectorAll("h1"),
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: headlineRef.current,
+          start: "top 90%",
+        },
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
+  useEffect(() => {
+    gsap.fromTo(
+      productsRef.current.querySelectorAll(".products > div"),
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: productsRef.current,
+          start: "top 90%",
+        },
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   const toggleProducts = () => {
@@ -172,7 +215,7 @@ function About() {
               className="w-[12vw] h-[2.5vh] border-[1px] border-black rounded-[2vw] relative"
             >
               <div
-                className={`w-[3vw] h-[1.5vh] bg-black rounded-full 
+                className={`w-[3vw] h-[1.5vh] bg-black rounded-full
                 transition-transform duration-500 absolute top-[0.4vh] left-[0.4vw] ${
                   !showProducts ? "translate-x-[8vw]" : "translate-x-0"
                 }`}
@@ -185,13 +228,13 @@ function About() {
         <Swiper className="mt-[15vh]" slidesPerView={1} spaceBetween={-30}>
           {showProducts && (
             <div
-              className={`products transition-opacity duration-500 
+              className={`products transition-opacity duration-500
               ${showProducts ? "opacity-100" : "opacity-0"}`}
             >
               {products.map((product, index) => (
                 <SwiperSlide key={index}>
                   <div
-                    className={`flex flex-col gap-[4vw] w-[85vw] h-[75vh] px-[4vw] py-[2vh] rounded-[5vw] 
+                    className={`flex flex-col gap-[4vw] w-[85vw] h-[75vh] px-[4vw] py-[2vh] rounded-[5vw]
                   ${index === 2 ? "gap-[22px]" : ""} relative `}
                     style={{ backgroundColor: product.bg }}
                     key={index}
@@ -217,7 +260,7 @@ function About() {
                       <div className="assurances mt-[2vh] flex flex-col gap-[2vh]">
                         <div className="flex items-center gap-[4vw]">
                           <div
-                            className="tick bg-gray-500 w-[4vw] h-[2vh] rounded-full 
+                            className="tick bg-gray-500 w-[4vw] h-[2vh] rounded-full
                       flex justify-center items-center"
                           >
                             <img
@@ -232,7 +275,7 @@ function About() {
                         </div>
                         <div className="flex items-center gap-[4vw]">
                           <div
-                            className="tick bg-gray-500 w-[4vw] h-[2vh] rounded-full 
+                            className="tick bg-gray-500 w-[4vw] h-[2vh] rounded-full
                       flex justify-center items-center"
                           >
                             <img
@@ -247,7 +290,7 @@ function About() {
                         </div>
                         <div className="flex items-center gap-[1vw]">
                           <div
-                            className="tick bg-gray-500 w-[4vw] h-[2vh] rounded-full 
+                            className="tick bg-gray-500 w-[4vw] h-[2vh] rounded-full
                       flex justify-center items-center"
                           >
                             <img
@@ -262,7 +305,7 @@ function About() {
                         </div>
                       </div>
                       <button
-                        className=" button mt-[4vh] w-full bg-[#FCF7E6] rounded-[4vw] 
+                        className=" button mt-[4vh] w-full bg-[#FCF7E6] rounded-[4vw]
                   uppercase font-[light] tracking-widest text-[3vw] py-[1vh] overflow-hidden"
                       >
                         Subscribe now
@@ -282,7 +325,7 @@ function About() {
         <Swiper slidesPerView={1} spaceBetween={-35}>
           {showPods && (
             <div
-              className={`pods transition-all duration-500  
+              className={`pods transition-all duration-500
               ${!showProducts ? "opacity-100" : "opacity-0"}`}
             >
               {pods.map((pod, index) => (
@@ -309,7 +352,7 @@ function About() {
                       <div className="border-[1px] border-black"></div>
                       <div className="mt-[25vh]">
                         <button
-                          className=" button mt-[4vh] w-full bg-[#FCF7E6] rounded-[4vw] 
+                          className=" button mt-[4vh] w-full bg-[#FCF7E6] rounded-[4vw]
                   uppercase font-[light] tracking-widest text-[3vw] py-[1vh] overflow-hidden"
                         >
                           Subscribe now
@@ -393,7 +436,10 @@ function About() {
           </div>
           <div className="subscribe h-[80vh] px-[2vw] mt-[50vh] flex items-start gap-[1.1vw] relative">
             <div className="header flex flex-col gap-[3vh] items-start">
-              <div ref={headlineRef} className="head font-[headline] text-[3.7vw] leading-[4vw]">
+              <div
+                ref={headlineRef}
+                className="head font-[headline] text-[3.7vw] leading-[4vw]"
+              >
                 <h1>Subscribe</h1>
                 <h1>today.</h1>
               </div>
@@ -428,6 +474,7 @@ function About() {
 
             {showProducts && (
               <div
+                ref={productsRef}
                 className={`products flex gap-[2vw] pl-[6vw] transition-opacity duration-500 absolute top-0 left-[21vw]
               ${showProducts ? "opacity-100" : "opacity-0"}`}
               >

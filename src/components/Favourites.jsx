@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Favourites() {
   const [currentIndex, setCurrentIndex] = useState(14);
   const [isMobile, setIsMobile] = useState(false);
+  const headerRef = useRef(null);
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -306,6 +311,27 @@ function Favourites() {
     },
   ];
 
+  useEffect(() => {
+    gsap.fromTo(
+      headerRef.current,
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.5,
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: "top 90%",
+        },
+      }
+    );
+  }, []);
+
   const productsPerPage = 3;
   const maxIndex = products.length - productsPerPage;
 
@@ -382,7 +408,12 @@ function Favourites() {
       ) : (
         <div className="w-full min-h-screen bg-[#FCF7E6] relative">
           <div className="header pt-[30vh] flex justify-between items-center mb-[5vh] px-[2vw]">
-            <h1 className="font-[headline] text-[4vw]">Our Favourites.</h1>
+            <h1
+              ref={headerRef}
+              className="header-text font-[headline] text-[4vw]"
+            >
+              Our Favourites.
+            </h1>
             <button
               className="button uppercase font-[light] tracking-widest 
           text-[0.9vw] border border-black px-[2vw] py-[1vh] rounded-[2vw] overflow-hidden"
@@ -398,7 +429,7 @@ function Favourites() {
             >
               {products.map((product, index) => (
                 <div
-                  className="text-center rounded-[4vw] px-[4vw] w-1/3 group 
+                  className="product text-center rounded-[4vw] px-[4vw] w-1/3 group 
                 hover:bg-[#F5F0DF] transition-colors duration-300 ease-in-out"
                   key={index}
                 >
