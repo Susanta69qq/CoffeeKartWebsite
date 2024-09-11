@@ -5,6 +5,8 @@ import About from './components/About'
 import Favourites from './components/Favourites'
 import Brand from './components/Brand'
 import ImageBack from './components/ImageBack'
+import VisitUs from './components/VisitUs'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <Favourites />
       <Brand />
       <ImageBack />
+      <VisitUs />
+      <Footer />
     </div>
   )
 }
