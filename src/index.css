@@ -167,3 +167,21 @@
   left: 0;
 }
 
+.layover { 
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 0; 
+  margin: 0;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.layover h1 {
+  width: 0%; 
+  text-wrap: nowrap; 
+  overflow: hidden;
+}
