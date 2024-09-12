@@ -7,6 +7,7 @@ import Brand from './components/Brand'
 import ImageBack from './components/ImageBack'
 import VisitUs from './components/VisitUs'
 import Footer from './components/Footer'
+import AllProducts from './components/AllProducts'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <ImageBack />
       <VisitUs />
       <Footer />
+      <AllProducts />
     </div>
   )
 }
