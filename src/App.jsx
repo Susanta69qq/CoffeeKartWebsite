@@ -8,11 +8,12 @@ import ImageBack from './components/ImageBack'
 import VisitUs from './components/VisitUs'
 import Footer from './components/Footer'
 import AllProducts from './components/AllProducts'
+import LoginPage from './components/LoginPage'
+import Register from './components/Register'
 
 function App() {
   return (
     <div className='w-full h-full bg-[#FCF7E6]'>
-      <Navbar />
       <LandingPage />
       <About />
       <Favourites />
@@ -20,7 +21,6 @@ function App() {
       <ImageBack />
       <VisitUs />
       <Footer />
-      <AllProducts />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -357,13 +358,15 @@ function Favourites() {
     <div className="w-full min-h-screen bg-[#FCF7E6] relative">
       <div className="header pt-[15vh] flex flex-col mb-[5vh] px-[2vw] gap-[2vh]">
         <h1 className="font-[headline] text-[8vw]">Our Favourites.</h1>
-        <button
-          className="button uppercase font-[light] tracking-widest 
+        <Link to={"/all-products"}>
+          <button
+            className="button uppercase font-[light] tracking-widest 
         text-[3.4vw] border border-black px-[2vw] py-[1vh] rounded-[5vw] overflow-hidden"
-        >
-          shop now
-          <div className="button-bg"></div>
-        </button>
+          >
+            shop now
+            <div className="button-bg"></div>
+          </button>
+        </Link>
       </div>
       <div className="favProducts pb-[20vh] overflow-hidden">
         <Swiper slidesPerView={1} speed={500}>
@@ -414,13 +417,15 @@ function Favourites() {
             >
               Our Favourites.
             </h1>
-            <button
-              className="button uppercase font-[light] tracking-widest 
+            <Link to={"/all-products"}>
+              <button
+                className="button uppercase font-[light] tracking-widest 
           text-[0.9vw] border border-black px-[2vw] py-[1vh] rounded-[2vw] overflow-hidden"
-            >
-              shop now
-              <div className="button-bg"></div>
-            </button>
+              >
+                shop now
+                <div className="button-bg"></div>
+              </button>
+            </Link>
           </div>
           <div className="favProducts pb-[20vh] overflow-hidden">
             <div

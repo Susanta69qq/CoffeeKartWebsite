@@ -125,10 +125,10 @@ function Navbar() {
           </div>
         </div>
 
-        <img className="logo max-sm:w-[40vw]" src="./images/logo.svg" alt="" />
+        <Link to={"/"}><img className="logo max-sm:w-[40vw]" src="./images/logo.svg" alt="" /></Link>
       </div>
       <div className="nav2 flex max-sm:gap-[6vw] items-center">
-        <img className="max-sm:w-[6vw]" src="./images/user.svg" alt="" />
+        <Link to={"/login"}><img className="max-sm:w-[6vw]" src="./images/user.svg" alt="" /></Link>
         <img className="max-sm:w-[6vw]" src="./images/cart.svg" alt="" />
       </div>
     </div>
@@ -226,7 +226,7 @@ function Navbar() {
 
           {/* User and Cart Icons */}
           <div className="flex gap-[2vw] items-center">
-            <Link>
+            <Link to={"/login"}>
               <span className="text-[1.7vw]">
                 <i className="ri-user-line"></i>
               </span>
