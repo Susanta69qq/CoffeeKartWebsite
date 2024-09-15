@@ -9,6 +9,9 @@ import AllProducts from "./components/AllProducts.jsx";
 import Layout from "./Layout.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import Register from "./components/Register.jsx";
+import Coffee from "./components/Coffee.jsx";
+import Equipments from "./components/Equipments.jsx";
+import Bundles from "./components/Bundles.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,18 @@ const router = createBrowserRouter([
       {
         path: "/all-products",
         element: <AllProducts />,
+      },
+      {
+        path: "/category/coffee",
+        element: <Coffee />
+      },
+      {
+        path: "/category/equipment",
+        element: <Equipments />
+      },
+      {
+        path: "/category/bundles",
+        element: <Bundles />
       },
       {
         path: "/login",

@@ -161,7 +161,7 @@ function Footer() {
    <div>
     {isMobile ? mobileView : (
        <div
-       className="w-full min-h-screen mt-[15vh] bg-black rounded-tl-[2vw] 
+       className="w-full min-h-screen pt-[15vh] bg-black rounded-tl-[2vw] 
      rounded-tr-[2vw] px-[2vw] py-[6vh]"
      >
        <div className="header w-full text-[#FCF7E6] flex justify-between gap-[3.75vw]">

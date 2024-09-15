@@ -1,50 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
+import API from "../services/api.js";
+import { Link } from "react-router-dom";
+import ProductsHeader from "../ProductsHeader.jsx";
 
 function AllProducts() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await API.get("/api/products");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div>
-      <div className="w-full min-h-screen px-[2vw] bg-[#FCF7E6]">
-        <div
-          className="top w-full h-[80vh] py-[10vh] flex items-end gap-[15vw] relative 
-      border-b-[1px] border-opacity-20 border-black"
-        >
-          <div className="left">
-            <div className="filterLinks flex flex-col gap-[1.5vh]">
-              <h5 className="font-[light] uppercase tracking-widest text-[0.9vw]">
-                shop
-              </h5>
-              {["coffee", "equipment", "merch", "bundles", "gifts"].map(
-                (item, index) => (
-                  <h1
-                    className="w-[max-content] font-[headline] capitalize text-[3vw] opacity-20 transition-opacity 
-                  ease-in-out duration-500
-                  hover:opacity-100 hover:border-b-[1px] hover:border-black cursor-pointer"
-                    key={index}
+      <div className="w-full min-h-screen px-[2vw] bg-[#FCF7E6] pb-[15vh]">
+        <ProductsHeader
+          title={"All Products"}
+          description={
+            "Find a compilation of all our coffee, equipment and gifting ideas in one place"
+          }
+        />
+        <Link>
+          <div className="products grid grid-cols-3 gap-[3vw] items-start mt-[10vh]">
+            {products.map((product) => (
+              <div
+                className="product flex flex-col gap-[2vh] group hover:bg-[#F5F0DF] rounded-[2vw] px-[1.3vw] 
+              transition-colors duration-300 ease-in-out"
+              >
+                <img src={product.image} alt="product" />
+                <h2 className="font-[headline] text-[1.3vw] text-center">
+                  {product.name}
+                </h2>
+                <h5 className="font-[light] text-[1.2vw] text-center leading-[1.5vw]">
+                  {product.description}
+                </h5>
+                <h5 className="font-[medium] text-center">
+                  Rs. {product.price}.00
+                </h5>
+                <div
+                  className="mt-[2vw] flex flex-col gap-[2vw] opacity-0 
+                transition-opacity duration-300 group-hover:opacity-100 mb-[2vh]"
+                >
+                  <Link>
+                    <button
+                      className="button overflow-hidden font-[light] tracking-widest 
+          text-[0.9vw] border border-black px-[2vw] py-[1vh] rounded-[2vw] w-full
+          transition-colors duration-300 ease-in-out group-hover:bg-[#F5F0DF]"
+                    >
+                      Buy Now
+                      <div className="button-bg"></div>
+                    </button>
+                  </Link>
+                  <h5
+                    className="font-[light] uppercase text-[0.9vw] text-center tracking-widest 
+                  underline underline-offset-[0.7vh]"
                   >
-                    {item}
-                  </h1>
-                )
-              )}
-            </div>
+                    Read More
+                  </h5>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="right flex flex-col gap-[2vh]">
-            <h1 className="font-[headline] text-[7vw] leading-[8vw]">
-              All Products.
-            </h1>
-            <p className="font-[light]">
-              Find a compilation of all our coffee, equipment and gifting ideas
-              in one place.
-            </p>
-          </div>
-          <div className="logo absolute top-[10vh] right-0">
-            <h5 className="font-[light] uppercase text-[0.9vw] tracking-[3px]">
-              WatchHouse ©
-            </h5>
-          </div>
-        </div>
+        </Link>
       </div>
-
       <Footer />
     </div>
   );
