@@ -71,7 +71,7 @@
 .button {
   position: relative;
   display: inline-block;
-  background-color: #FCF7E6;
+  background-color: #fcf7e6;
   color: #000;
   transition: color 0.5s ease;
   z-index: 1;
@@ -95,7 +95,7 @@
 }
 
 .button:hover {
-  color: #FCF7E6;
+  color: #fcf7e6;
 }
 
 .movingAnimation {
@@ -127,61 +127,79 @@
   }
 }
 
-.link{
+.link {
   position: relative;
 }
 
-.link::after{
+.link::after {
   content: "";
   position: absolute;
   left: 50%;
   bottom: -10%;
   width: 0;
   height: 1px;
-  background-color: #FCF7E6;
+  background-color: #fcf7e6;
   transition: width 0.5s ease, left 0.5s ease;
 }
 
-.link:hover::after{
+.link:hover::after {
   width: 100%;
   left: 0;
 }
 
-.impLink{
+.impLink {
   position: relative;
 }
 
-.impLink::after{
+.impLink::after {
   content: "";
   position: absolute;
   left: 50%;
   bottom: -10%;
   width: 0;
   height: 1px;
-  background-color: #FCF7E6;
-  transition: width 0.5s ease, left 0.5s ease
+  background-color: #fcf7e6;
+  transition: width 0.5s ease, left 0.5s ease;
 }
 
-.impLink:hover::after{
+.impLink:hover::after {
   width: 100%;
   left: 0;
 }
 
-.layover { 
+.layover {
   overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  padding: 0; 
-  margin: 0;  
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .layover h1 {
-  width: 0%; 
-  text-wrap: nowrap; 
+  width: 0%;
+  text-wrap: nowrap;
   overflow: hidden;
 }
+
+/* .loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */

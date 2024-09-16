@@ -8,15 +8,20 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError("");
     try {
       const response = await API.post("/api/auth/login", { email, password });
       localStorage.setItem("token", response.data.token);
+      setIsLoading(false);
       navigate("/account");
     } catch (error) {
+      setIsLoading(false);
       setError("Invalid credentials. Please try again.");
     }
   };
@@ -32,10 +37,12 @@ function LoginPage() {
         </h1>
 
         {/* Show error message*/}
-        {error ? (
-          <p className="text-red-500 text-center mb-[2vh]">{error}</p>
-        ) : (
-          <p className="text-center mb-[2vh]">Loading...</p>
+        {error && <p className="text-red-500 text-center mb-[2vh]">{error}</p>}
+
+        {isLoading && (
+          <p className="text-center mb-[2vh]">
+            Verifying... <span className="loader"></span>
+          </p>
         )}
 
         <form onSubmit={handleLogin}>
@@ -45,18 +52,20 @@ function LoginPage() {
               font-[medium] placeholder:text-black max-sm:placeholder:text-[4vw] placeholder:font-[medium]"
               type="email"
               placeholder="Email Address"
-              value={email} // Bind email state to input value
-              onChange={(e) => setEmail(e.target.value)} // Update email state on change
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={isLoading}
             />
             <input
               className="bg-transparent w-[25vw] max-sm:w-full outline-none border-b-[1px] border-black 
               font-[medium] placeholder:text-black max-sm:placeholder:text-[4vw] placeholder:font-[medium]"
               type="password"
               placeholder="Enter password"
-              value={password} // Bind password state to input value
-              onChange={(e) => setPassword(e.target.value)} // Update password state on change
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
 
@@ -72,8 +81,9 @@ function LoginPage() {
             type="submit"
             className="button w-full mt-[5vh] py-[1vh] bg-[#FCF7E6] overflow-hidden border-[1px] border-black 
             rounded-[5vw] uppercase font-[light] text-[0.9vw] max-sm:text-[3vw] tracking-[2px]"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
             <div className="button-bg"></div>
           </button>
         </form>
