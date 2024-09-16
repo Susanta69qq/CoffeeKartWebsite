@@ -12,6 +12,9 @@ import Register from "./components/Register.jsx";
 import Coffee from "./components/Coffee.jsx";
 import Equipments from "./components/Equipments.jsx";
 import Bundles from "./components/Bundles.jsx";
+import { AuthProvider } from "./AuthContext.jsx";
+import Account from "./components/Account.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,23 +31,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/category/coffee",
-        element: <Coffee />
+        element: <Coffee />,
       },
       {
         path: "/category/equipment",
-        element: <Equipments />
+        element: <Equipments />,
       },
       {
         path: "/category/bundles",
-        element: <Bundles />
+        element: <Bundles />,
       },
       {
         path: "/login",
-        element: <LoginPage />
+        element: <LoginPage />,
       },
       {
         path: "/register",
-        element: <Register />
+        element: <Register />,
+      },
+      {
+        path: "/account",
+        element: <Account />,
       }
     ],
   },
@@ -52,7 +59,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <SmoothScroll />
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <SmoothScroll />
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
