@@ -17,6 +17,10 @@
   src: url(../fonts/Balto-Medium.ttf);
 }
 
+body{
+  overflow-x: hidden;
+}
+
 .links {
   position: relative;
 }
