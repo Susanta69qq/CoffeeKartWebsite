@@ -125,7 +125,7 @@ function Navbar() {
           </div>
         </div>
 
-        <Link to={"/"}><img className="logo max-sm:w-[40vw]" src="./images/logo.svg" alt="" /></Link>
+        <Link to={"/"}><img className="logo max-sm:w-[40vw]" src="/images/logo.svg" alt="" /></Link>
       </div>
       <div className="nav2 flex max-sm:gap-[6vw] items-center">
         <Link to={"/login"}><img className="max-sm:w-[6vw]" src="./images/user.svg" alt="" /></Link>
@@ -220,7 +220,7 @@ function Navbar() {
 
             {/* SVG Logo */}
             <Link to={"/"}>
-              <img src="./images/logo.svg" alt="Logo" />
+              <img src="/images/logo.svg" alt="Logo" />
             </Link>
           </div>
 

@@ -45,7 +45,7 @@ function Footer() {
                 <img
                   className="absolute top-[50%] left-[50%] translate-x-[-50%] 
                   translate-y-[-50%]"
-                  src="./images/rightarrow.svg"
+                  src="/images/rightarrow.svg"
                   alt=""
                 />
               </div>
@@ -102,9 +102,9 @@ function Footer() {
         <div className="paymentOptions mt-[4vh]">
           <h4 className="font-[medium] text-[4vw]">Payment Methods.</h4>
           <div className="logos flex gap-[2vw] mt-[3vh]">
-            <img className="w-[20vw]" src="./images/mastercardlogo.avif" alt="" />
-            <img className="w-[20vw]" src="./images/visalogo.webp" alt="" />
-            <img className="w-[20vw]" src="./images/paypal.webp" alt="" />
+            <img className="w-[20vw]" src="/images/mastercardlogo.avif" alt="" />
+            <img className="w-[20vw]" src="/images/visalogo.webp" alt="" />
+            <img className="w-[20vw]" src="/images/paypal.webp" alt="" />
           </div>
         </div>
       </div>
@@ -112,27 +112,27 @@ function Footer() {
         <div className="socialLinks flex gap-[8vw] cursor-pointer">
           <img
             className="w-[4vw] hover:opacity-50 transition-opacity duration-300"
-            src="./images/whitefb.svg"
+            src="/images/whitefb.svg"
             alt=""
           />
           <img
             className="w-[4.5vw] hover:opacity-50 transition-opacity duration-300"
-            src="./images/whiteinsta.svg"
+            src="/images/whiteinsta.svg"
             alt=""
           />
           <img
             className="w-[4.5vw] hover:opacity-50 transition-opacity duration-300"
-            src="./images/whitetwitter.svg"
+            src="/images/whitetwitter.svg"
             alt=""
           />
           <img
             className="w-[4.5vw] hover:opacity-50 transition-opacity duration-300"
-            src="./images/whitelinked.svg"
+            src="/images/whitelinked.svg"
             alt=""
           />
           <img
             className="w-[4.5vw] hover:opacity-50 transition-opacity duration-300"
-            src="./images/whiterandom.svg"
+            src="/images/whiterandom.svg"
             alt=""
           />
         </div>
@@ -140,7 +140,7 @@ function Footer() {
           className="currency border border-[#FCF7E6] px-[1vw] py-[0.5vw] 
         rounded-[5vw] flex items-center gap-[1vw] "
         >
-          <img src="./images/ukflag.svg" alt="" />
+          <img src="/images/ukflag.svg" alt="" />
           <h3 className="font-[light] text-[#FCF7E6] ml-4">UK - GBP</h3>
         </div>
         <div className="importantLinks flex gap-[4vw] mt-[5vh]">
@@ -190,7 +190,7 @@ function Footer() {
                  <img
                    className="absolute top-[50%] left-[50%] translate-x-[-50%] 
                    translate-y-[-50%]"
-                   src="./images/rightarrow.svg"
+                   src="/images/rightarrow.svg"
                    alt=""
                  />
                </div>
@@ -247,9 +247,9 @@ function Footer() {
          <div className="paymentOptions">
            <h4 className="font-[medium] text-[1vw]">Payment Methods.</h4>
            <div className="logos flex gap-[1vw] mt-[3vh]">
-             <img src="./images/mastercardlogo.avif" alt="" />
-             <img src="./images/visalogo.webp" alt="" />
-             <img src="./images/paypal.webp" alt="" />
+             <img src="/images/mastercardlogo.avif" alt="" />
+             <img src="/images/visalogo.webp" alt="" />
+             <img src="/images/paypal.webp" alt="" />
            </div>
          </div>
        </div>
@@ -257,27 +257,27 @@ function Footer() {
          <div className="socialLinks w-[10vw] flex gap-[2vw] cursor-pointer">
            <img
              className="w-[1vw] hover:opacity-50 transition-opacity duration-300"
-             src="./images/whitefb.svg"
+             src="/images/whitefb.svg"
              alt=""
            />
            <img
              className="w-[1.5vw] hover:opacity-50 transition-opacity duration-300"
-             src="./images/whiteinsta.svg"
+             src="/images/whiteinsta.svg"
              alt=""
            />
            <img
              className="w-[1.5vw] hover:opacity-50 transition-opacity duration-300"
-             src="./images/whitetwitter.svg"
+             src="/images/whitetwitter.svg"
              alt=""
            />
            <img
              className="w-[1.5vw] hover:opacity-50 transition-opacity duration-300"
-             src="./images/whitelinked.svg"
+             src="/images/whitelinked.svg"
              alt=""
            />
            <img
              className="w-[1.5vw] hover:opacity-50 transition-opacity duration-300"
-             src="./images/whiterandom.svg"
+             src="/images/whiterandom.svg"
              alt=""
            />
          </div>
@@ -285,7 +285,7 @@ function Footer() {
            className="currency border border-[#FCF7E6] px-[1vw] py-[0.5vw] 
          rounded-[2vw] flex items-center gap-[1vw] w-[11vw]"
          >
-           <img src="./images/ukflag.svg" alt="" />
+           <img src="/images/ukflag.svg" alt="" />
            <h3 className="font-[light] text-[#FCF7E6]">UK - GBP</h3>
          </div>
          <div className="importantLinks flex gap-[2vw]">

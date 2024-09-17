@@ -15,6 +15,7 @@ import Bundles from "./components/Bundles.jsx";
 import { AuthProvider } from "./AuthContext.jsx";
 import Account from "./components/Account.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import ProductDetails from "./components/ProductDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <Account />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails />
       }
     ],
   },
