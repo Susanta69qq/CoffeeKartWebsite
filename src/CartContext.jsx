@@ -10,17 +10,6 @@ export function useCart() {
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
-  // // Load cart from localStorage when the component mounts
-  // useEffect(() => {
-  //   const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-  //   setCart(savedCart);
-  // }, []);
-
-  // // Save cart to localStorage whenever the cart changes
-  // useEffect(() => {
-  //   localStorage.setItem('cart', JSON.stringify(cart));
-  // }, [cart]);
-
   const addToCart = (product, quantity = 1) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find(
