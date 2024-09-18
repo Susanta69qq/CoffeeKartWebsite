@@ -16,6 +16,7 @@ import { AuthProvider } from "./AuthContext.jsx";
 import Account from "./components/Account.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import ProductDetails from "./components/ProductDetails.jsx";
+import { CartProvider } from "./CartContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -56,17 +57,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/products/:id",
-        element: <ProductDetails />
-      }
+        element: <ProductDetails />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <SmoothScroll />
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <CartProvider>
+      <AuthProvider>
+        <SmoothScroll />
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </CartProvider>
   </StrictMode>
 );

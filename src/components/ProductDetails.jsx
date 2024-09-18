@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../services/api.js";
 import Footer from "./Footer";
+import { useCart } from "../CartContext.jsx";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -25,7 +27,11 @@ const ProductDetails = () => {
     setQuantity(event.target.value);
   };
 
-  const handleAddToCart = () => {};
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product, quantity);
+    }
+  };
 
   return (
     <div>
@@ -33,7 +39,11 @@ const ProductDetails = () => {
         <div className="w-full bg-[#BB9978]">
           <div className="w-full min-h-screen px-[4vw] flex items-center">
             <div className="left">
-              <img className="object-cover" src={product.image} alt="" />
+              <img
+                className="object-cover"
+                src={product.image}
+                alt={product.name}
+              />
             </div>
             <div className="right mt-[10vh]">
               <div className="topContent">
@@ -56,7 +66,14 @@ const ProductDetails = () => {
                   >
                     <i className="ri-subtract-line"></i>
                   </div>
-                  <div className="number">{quantity}</div>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={handleQuantityChange}
+                    className="number w-[2.5vw] text-center"
+                    min="1"
+                    max="10"
+                  />
                   <div
                     onClick={() =>
                       quantity < 10
@@ -73,6 +90,7 @@ const ProductDetails = () => {
               <button
                 className="button font-[light] text-[1.1vw] tracking-[2px] mt-[5vh] 
             w-full rounded-[2vw] py-[.8vh] overflow-hidden"
+                onClick={handleAddToCart}
               >
                 Rs. {product.price} - ADD TO CART
                 <div className="button-bg"></div>
@@ -83,7 +101,7 @@ const ProductDetails = () => {
             <img
               className="w-full object-cover rounded-[2vw]"
               src="/images/HeroProductDesktop.jpeg"
-              alt=""
+              alt="Hero Product"
             />
             <div className="textContent absolute top-0 px-[4vw] py-[10vh]">
               <h1 className="font-[headline] text-[5vw] text-[#2B2B27]">
@@ -97,25 +115,22 @@ const ProductDetails = () => {
                 world. We share these sourcing stories with you, as we believe
                 enjoyment of food & coffee is more than just consumption, it's
                 knowledge. We take equal pride in the skill that goes into
-                sourcing, production and presentation.
+                sourcing, production, and presentation.
               </p>
             </div>
           </div>
           <div className="about flex justify-between bg-[#F5F0DF] px-[2vw] py-[5vh] mb-[10vh]">
             <div className="farmer flex items-center gap-[1vw]">
-              <img className="w-[6vw]" src="/images/farmer.svg" alt="" />
+              <img className="w-[6vw]" src="/images/farmer.svg" alt="Farmer" />
               <div className="text flex flex-col gap-[1vw]">
-                <div
-                //   ref={headlineRef}
-                  className="header font-[headline] text-[1.75vw] leading-[1.75vw]"
-                >
+                <div className="header font-[headline] text-[1.75vw] leading-[1.75vw]">
                   <h1>Globally sourced.</h1>
                   <h1>Locally crafted.</h1>
                 </div>
                 <div className="details font-[light] text-[1.25vw] leading-[1.7vw]">
                   <p>
-                    Cupped, tested, developed and roasted <br />
-                    at out Coffee Lab right here in South <br />
+                    Cupped, tested, developed, and roasted <br />
+                    at our Coffee Lab right here in South <br />
                     London.
                   </p>
                 </div>
@@ -123,7 +138,11 @@ const ProductDetails = () => {
             </div>
 
             <div className="lab flex items-center gap-[1vw]">
-              <img className="w-[6vw]" src="/images/labtest.svg" alt="" />
+              <img
+                className="w-[6vw]"
+                src="/images/labtest.svg"
+                alt="Lab Test"
+              />
               <div className="text flex flex-col gap-[1vw]">
                 <div className="header font-[headline] text-[1.75vw] leading-[1.75vw]">
                   <h1>Modern Coffee.</h1>
@@ -140,7 +159,7 @@ const ProductDetails = () => {
             </div>
 
             <div className="aroma flex items-center gap-[1vw]">
-              <img className="w-[6vw]" src="/images/aroma.svg" alt="" />
+              <img className="w-[6vw]" src="/images/aroma.svg" alt="Aroma" />
               <div className="text flex flex-col gap-[1vw]">
                 <div className="header font-[headline] text-[1.75vw] leading-[1.75vw]">
                   <h1>Twenty Houses, no two</h1>
@@ -148,7 +167,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="details font-[light] text-[1.25vw] leading-[1.7vw]">
                   <p>
-                    Each of our loactions are designed to <br />
+                    Each of our locations is designed to <br />
                     play a contemporary role in the Modern <br />
                     Coffee experience.
                   </p>

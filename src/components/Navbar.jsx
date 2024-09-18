@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../CartContext.jsx";
 
 function Navbar() {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -8,6 +9,8 @@ function Navbar() {
   const [isCoffeeHovered, setIsCoffeeHovered] = useState(false);
   const [isEquipmentHovered, setIsEquipmentHovered] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+
+  const { cart, removeFromCart, cartItemCount, totalPrice } = useCart();
 
   const toggleCartMenu = () => {
     setCartOpen(!cartOpen);
@@ -34,16 +37,6 @@ function Navbar() {
 
     return () => window.removeEventListener("resize", resizeHandler);
   }, []);
-
-  // const handleMouseEnter = (item) => {
-  //   if (item === "Coffee") setIsCoffeeHovered(true);
-  //   if (item === "Equipment") setIsEquipmentHovered(true);
-  // };
-
-  // const handleMouseLeave = (item) => {
-  //   if (item === "Coffee") setIsCoffeeHovered(false);
-  //   if (item === "Equipment") setIsEquipmentHovered(false);
-  // };
 
   const mobileView = (
     <div
@@ -186,8 +179,19 @@ function Navbar() {
                 <i className="ri-user-line"></i>
               </span>
             </Link>
-            <span onClick={toggleCartMenu} className="text-[1.7vw] cursor-pointer">
+            <span
+              onClick={toggleCartMenu}
+              className="text-[1.7vw] cursor-pointer"
+            >
               <i className="ri-shopping-bag-line"></i>
+              {cartItemCount > 0 && (
+                <span
+                  className="cart-count absolute top-[2.5vw] right-[2.5vw] bg-red-500 text-white rounded-full 
+                text-xs w-[20px] h-[20px] flex items-center justify-center"
+                >
+                  {cartItemCount}
+                </span>
+              )}
             </span>
           </div>
         </div>
@@ -202,7 +206,7 @@ function Navbar() {
       )}
 
       <div
-        className={`cartDiv w-[45vw] min-h-[100vh] bg-[#FCF7E6] fixed top-0 right-0 
+        className={`cartDiv w-[45vw] min-h-[100vh] overflow-y-auto bg-[#FCF7E6] fixed top-0 right-0 
                 rounded-[2vw] z-[10] px-[3vw] py-[6vh] flex flex-col justify-between 
                 transition-all duration-500 ease-in-out ${
                   cartOpen ? "right-0" : "right-[-50vw]"
@@ -226,21 +230,76 @@ function Navbar() {
           </div>
         </div>
 
-        <div className="bottom">
-          <div className="border border-t-[1px] border-black"></div>
+        <div className="bottom max-h-[60vh] overflow-y-auto">
           <div className="bottomContent mt-[2vh]">
-            <h1 className="font-[headline] text-[2.75vw]">
-              Your cart is currently empty.
-            </h1>
-            <Link to={"/all-products"}>
-              <button
-                className="button w-full mt-[3.5vh] uppercase text-[0.9vw] tracking-[2px] 
-                    border border-black py-[1.3vh] rounded-[2vw] overflow-hidden"
-              >
-                shop now
-                <div className="button-bg"></div>
-              </button>
-            </Link>
+            {cart.length === 0 ? (
+              <div className="bottomCartContent">
+                <div className="border border-t-[1px] border-black"></div>
+                <h1 className="font-[headline] text-[2.75vw]">
+                  Your cart is currently empty.
+                </h1>
+                <Link to={"/all-products"}>
+                  <button
+                    className="button w-full mt-[3.5vh] uppercase text-[0.9vw] tracking-[2px] 
+                   border border-black py-[1.3vh] rounded-[2vw] overflow-hidden"
+                  >
+                    shop now
+                    <div className="button-bg"></div>
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-[2vw]">
+                {cart.map((item) => (
+                  <div
+                    key={item.product._id}
+                    className="cart-item flex flex-col gap-[2vw] 
+                  border-t-[1px] border-gray-600 py-[2vh]"
+                  >
+                    <div className="flex justify-between items-center">
+                      <img
+                        className="w-[10vw]"
+                        src={item.product.image}
+                        alt=""
+                      />
+                      <h2 className="font-[medium] w-[10vw] text-[1.35vw]">
+                        {item.product.name}
+                      </h2>
+                      <p className="font-[light] text-[.95vw]">
+                        Quantity: {item.quantity}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center border-t-[1px] border-black py-[2vh]">
+                      <p className="font-[light]">
+                        Price: Rs. {item.product.price}
+                      </p>
+                      <button
+                        onClick={() => removeFromCart(item.product._id)}
+                        className="delete-button font-[medium] text-red-500"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="totalPrice mt-[2vh] flex justify-between items-center border-t-[1px] 
+                border-black pt-[2vh]">
+                  <h2 className="font-[medium] text-[1.35vw]">Total Price:</h2>
+                  <p className="font-[medium] text-[1.3vw]">Rs. {totalPrice}</p>
+                </div>
+
+                <Link to={"/"}>
+                  <button
+                    className="button w-full mt-[3.5vh] uppercase text-[0.9vw] tracking-[2px] 
+     border border-black py-[1.3vh] rounded-[2vw] overflow-hidden"
+                  >
+                    Proceed to Checkout
+                    <div className="button-bg"></div>
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
