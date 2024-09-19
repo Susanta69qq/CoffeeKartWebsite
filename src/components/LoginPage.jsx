@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
+import { AuthContext } from "../AuthContext";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,8 @@ function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const { setIsAuthenticated } = React.useContext(AuthContext);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -18,6 +21,7 @@ function LoginPage() {
     try {
       const response = await API.post("/api/auth/login", { email, password });
       localStorage.setItem("token", response.data.token);
+      setIsAuthenticated(true);
       setIsLoading(false);
       navigate("/account");
     } catch (error) {
