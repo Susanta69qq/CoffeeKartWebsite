@@ -10,6 +10,23 @@ export function useCart() {
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
+  // Load cart from localStorage when component mounts
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    if (cart.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } else {
+      localStorage.removeItem("cart"); // Clear the cart if it's empty
+    }
+  }, [cart]);
+
   const addToCart = (product, quantity = 1) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find(

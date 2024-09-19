@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../CartContext.jsx";
+import { AuthContext } from "../AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -9,6 +11,9 @@ function Navbar() {
   const [isCoffeeHovered, setIsCoffeeHovered] = useState(false);
   const [isEquipmentHovered, setIsEquipmentHovered] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+
+  const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const { cart, removeFromCart, cartItemCount, totalPrice } = useCart();
 
@@ -24,6 +29,18 @@ function Navbar() {
   const toggleCart = () => {
     setCartToggle(!cartToggle);
     if (menuToggle) setMenuToggle(false);
+  };
+
+  const handleUserIconClick = () => {
+    const token = localStorage.getItem("token");
+
+    if (token && isAuthenticated) {
+      console.log("Navigating to /account page...");
+      navigate("/account");
+    } else {
+      console.log("Navigating to /login page...");
+      navigate("/login");
+    }
   };
 
   useEffect(() => {
@@ -134,9 +151,13 @@ function Navbar() {
         </Link>
       </div>
       <div className="nav2 flex max-sm:gap-[6vw] items-center">
-        <Link to={"/login"}>
-          <img className="max-sm:w-[6vw]" src="./images/user.svg" alt="" />
-        </Link>
+        <span onClick={handleUserIconClick}>
+          <img
+            className="max-sm:w-[6vw]"
+            src="./images/user.svg"
+            alt="User Icon"
+          />
+        </span>
         <img className="max-sm:w-[6vw]" src="./images/cart.svg" alt="" />
       </div>
     </div>
@@ -174,11 +195,10 @@ function Navbar() {
           </div>
 
           <div className="flex gap-[2vw] items-center">
-            <Link to={"/login"}>
-              <span className="text-[1.7vw]">
-                <i className="ri-user-line"></i>
-              </span>
-            </Link>
+            <span onClick={handleUserIconClick} className="text-[1.7vw] cursor-pointer">
+              <i className="ri-user-line"></i>
+            </span>
+
             <span
               onClick={toggleCartMenu}
               className="text-[1.7vw] cursor-pointer"
@@ -283,8 +303,10 @@ function Navbar() {
                   </div>
                 ))}
 
-                <div className="totalPrice mt-[2vh] flex justify-between items-center border-t-[1px] 
-                border-black pt-[2vh]">
+                <div
+                  className="totalPrice mt-[2vh] flex justify-between items-center border-t-[1px] 
+                border-black pt-[2vh]"
+                >
                   <h2 className="font-[medium] text-[1.35vw]">Total Price:</h2>
                   <p className="font-[medium] text-[1.3vw]">Rs. {totalPrice}</p>
                 </div>
