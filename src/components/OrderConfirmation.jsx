@@ -1,9 +1,39 @@
 import React, { useContext } from "react";
 import { useCart } from "../CartContext";
 import Footer from "./Footer";
+import API from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function OrderConfirmation() {
-  const { cart, cartItemCount, totalPrice, removeFromCart } = useCart();
+  const { cart, setCart, totalPrice, removeFromCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleConfirmOrder = async () => {
+    try {
+      const newOrder = {
+        products: cart.map((item) => ({
+          product: item.product._id,
+          quantity: item.quantity,
+        })),
+        totalPrice: totalPrice,
+      };
+
+      const response = await API.post("/api/orders/neworder", newOrder);
+
+      if (response.status === 200 || response.status === 201) {
+        console.log("Order successfully placed!!!");
+
+        setCart([]);
+        localStorage.removeItem("cart");
+
+        navigate("/account");
+      } else {
+        console.error("Failed to place order");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+    }
+  };
 
   return (
     <div className="w-full min-h-screen bg-[#F5F0DF]">
@@ -47,7 +77,10 @@ function OrderConfirmation() {
           <h5 className="font-[light] text-gray-600 border-b-[1px] border-gray-600 py-[3vh]">
             Shipping & taxes calculated at checkout
           </h5>
-          <button className="button overflow-hidden w-full rounded-[2vw] font-[medium] py-[1vh] mt-[2vw]">
+          <button
+            onClick={handleConfirmOrder}
+            className="button overflow-hidden w-full rounded-[2vw] font-[medium] py-[1vh] mt-[2vw]"
+          >
             Confirm Order
             <div className="button-bg"></div>
           </button>

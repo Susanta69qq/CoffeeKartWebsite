@@ -18,6 +18,7 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import ProductDetails from "./components/ProductDetails.jsx";
 import { CartProvider } from "./CartContext.jsx";
 import OrderConfirmation from "./components/OrderConfirmation.jsx";
+import MyOrders from "./components/MyOrders.jsx";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <OrderConfirmation />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "/my-orders",
+        element: (
+          <PrivateRoute>
+            <MyOrders />
           </PrivateRoute>
         )
       }
