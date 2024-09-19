@@ -43,6 +43,16 @@ function Navbar() {
     }
   };
 
+  const handleProceedCheckout = () => {
+    const token = localStorage.getItem("token");
+
+    if (token && isAuthenticated) {
+      navigate("/order-confirmation");
+    } else {
+      navigate("/login");
+    }
+  };
+
   useEffect(() => {
     const resizeHandler = () => {
       setIsMobile(window.innerWidth <= 640);
@@ -195,7 +205,10 @@ function Navbar() {
           </div>
 
           <div className="flex gap-[2vw] items-center">
-            <span onClick={handleUserIconClick} className="text-[1.7vw] cursor-pointer">
+            <span
+              onClick={handleUserIconClick}
+              className="text-[1.7vw] cursor-pointer"
+            >
               <i className="ri-user-line"></i>
             </span>
 
@@ -311,15 +324,14 @@ function Navbar() {
                   <p className="font-[medium] text-[1.3vw]">Rs. {totalPrice}</p>
                 </div>
 
-                <Link to={"/"}>
-                  <button
-                    className="button w-full mt-[3.5vh] uppercase text-[0.9vw] tracking-[2px] 
+                <button
+                  onClick={handleProceedCheckout}
+                  className="button w-full mt-[3.5vh] uppercase text-[0.9vw] tracking-[2px] 
      border border-black py-[1.3vh] rounded-[2vw] overflow-hidden"
-                  >
-                    Proceed to Checkout
-                    <div className="button-bg"></div>
-                  </button>
-                </Link>
+                >
+                  Proceed to Checkout
+                  <div className="button-bg"></div>
+                </button>
               </div>
             )}
           </div>

@@ -17,6 +17,7 @@ import Account from "./components/Account.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import ProductDetails from "./components/ProductDetails.jsx";
 import { CartProvider } from "./CartContext.jsx";
+import OrderConfirmation from "./components/OrderConfirmation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,14 @@ const router = createBrowserRouter([
         path: "/products/:id",
         element: <ProductDetails />,
       },
+      {
+        path: "/order-confirmation",
+        element: (
+          <PrivateRoute>
+            <OrderConfirmation />
+          </PrivateRoute>
+        )
+      }
     ],
   },
 ]);
