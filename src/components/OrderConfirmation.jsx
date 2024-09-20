@@ -1,14 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useCart } from "../CartContext";
 import Footer from "./Footer";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
 
 function OrderConfirmation() {
   const { cart, setCart, totalPrice, removeFromCart, cartItemCount } =
     useCart();
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
+  const cartRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,6 +23,23 @@ function OrderConfirmation() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    gsap.fromTo(
+      cartRef.current,
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: "power3.out",
+      }
+    );
+  }, [isMobile]);
 
   const handleConfirmOrder = async () => {
     try {
@@ -52,7 +71,7 @@ function OrderConfirmation() {
   const mobileView = (
     <div className="w-full min-h-screen bg-[#F5F0DF]">
       <div className="head px-[2vw] py-[5vh] max-sm:py-[2vh]">
-        <h1 className="font-[headline] text-[3.5vw] max-sm:text-[8vw]">
+        <h1 ref={cartRef} className="font-[headline] text-[3.5vw] max-sm:text-[8vw]">
           Your Cart
         </h1>
       </div>
@@ -75,12 +94,14 @@ function OrderConfirmation() {
                     <h2 className="font-[medium] text-[1.6vw] max-sm:text-[6vw]">
                       {item.product.name}
                     </h2>
-                    <p className="font-[light] text-gray-600 text-[4.5vw]">Quantity: {item.quantity}</p>
+                    <p className="font-[light] text-gray-600 text-[4.5vw]">
+                      Quantity: {item.quantity}
+                    </p>
                   </div>
                 </div>
                 <div className="flex justify-between mt-[2vh]">
                   <p className="font-[light] text-[1.2vw] max-sm:text-[4vw]">
-                   Price: Rs. {item.product.price}
+                    Price: Rs. {item.product.price}
                   </p>
                   <button
                     onClick={() => removeFromCart(item.product._id)}
@@ -124,7 +145,10 @@ function OrderConfirmation() {
       ) : (
         <div className="w-full min-h-screen bg-[#F5F0DF]">
           <div className="head px-[2vw] py-[5vh] max-sm:py-[2vh]">
-            <h1 className="font-[headline] text-[3.5vw] max-sm:text-[8vw]">
+            <h1
+              ref={cartRef}
+              className="font-[headline] text-[3.5vw] max-sm:text-[8vw]"
+            >
               Your Cart
             </h1>
           </div>

@@ -16,31 +16,31 @@ const ProductDetails = () => {
   const imgRef = useRef(null);
   const textRef = useRef(null);
 
-  useEffect(() => {
-    gsap.from(imgRef.current, {
-      y: 100,
-      duration: 1.5,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: imgRef.current,
-        start: "top 90%",
-        scrub: 2,
-      },
-    })
-  }, [])
+  // useEffect(() => {
+  //   gsap.from(imgRef.current, {
+  //     y: 100,
+  //     duration: 1.5,
+  //     ease: "power3.out",
+  //     scrollTrigger: {
+  //       trigger: imgRef.current,
+  //       start: "top 90%",
+  //       scrub: 2,
+  //     },
+  //   })
+  // }, [])
 
-  useEffect(() => {
-    gsap.from(textRef.current, {
-      y: 100,
-      duration: 1.5,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: textRef.current,
-        start: "top 90%",
-        scrub: 2,
-      },
-    })
-  }, [])
+  // useEffect(() => {
+  //   gsap.from(textRef.current, {
+  //     y: 100,
+  //     duration: 1.5,
+  //     ease: "power3.out",
+  //     scrollTrigger: {
+  //       trigger: textRef.current,
+  //       start: "top 90%",
+  //       scrub: 2,
+  //     },
+  //   })
+  // }, [])
 
   useEffect(() => {
     const fetchProduct = async () => {
