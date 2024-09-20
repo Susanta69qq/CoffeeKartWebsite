@@ -6,12 +6,21 @@ import { Link } from "react-router-dom";
 
 function Coffee() {
   const [products, setProducts] = useState([]);
+  const [visibleProducts, setVisibleProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await API.get("/api/products?category=coffee");
         setProducts(response.data);
+
+        response.data.forEach((product, index) => {
+          setTimeout(() => {
+            setVisibleProducts((prev) => [...prev, product]); // Add product to visible state
+          }, index * 100); // Delay each product by 100ms
+        });
+
+
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -34,7 +43,7 @@ function Coffee() {
           className="products grid grid-cols-3 max-sm:grid-cols-1 gap-[3vw] max-sm:gap-[2vw] 
         items-start mt-[10vh] max-sm:mt-[2vh]"
         >
-          {products.map((product) => (
+          {visibleProducts.map((product) => (
             <Link to={`/products/${product._id}`} key={product._id}>
               <div
                 className="product flex flex-col gap-[2vh] group hover:bg-[#F5F0DF] rounded-[2vw] px-[1.3vw] 
