@@ -27,7 +27,12 @@ function VisitUs() {
     gsap.fromTo(
       visitRef.current,
       { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 0.5, scrollTrigger: { trigger: visitRef.current, start: "top 90%" } }
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        scrollTrigger: { trigger: visitRef.current, start: "top 90%" },
+      }
     );
   }, []);
 
@@ -36,62 +41,50 @@ function VisitUs() {
 
     if (isMobile) {
       // Mobile animations
-      tl.to(
-        leftImgRef.current,
-        {
-          y: -50,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 60%",
-            scrub: 2
-          }
-        }
-      );
+      tl.to(leftImgRef.current, {
+        y: -50,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 60%",
+          scrub: 2,
+        },
+      });
 
-      tl.to(
-        rightImgRef.current,
-        {
-          y: 100,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 60%",
-            scrub: 2
-          }
-        }
-      );
+      tl.to(rightImgRef.current, {
+        y: 100,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 60%",
+          scrub: 2,
+        },
+      });
     } else {
       // Desktop animations
-      tl.to(
-        leftImgRef.current,
-        {
-          y: -100,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-            scrub: 1
-          }
-        }
-      );
+      tl.to(leftImgRef.current, {
+        y: -100,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          scrub: 1,
+        },
+      });
 
-      tl.to(
-        rightImgRef.current,
-        {
-          y: 50,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 40%",
-            scrub: 1
-          }
-        }
-      );
+      tl.to(rightImgRef.current, {
+        y: 50,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 40%",
+          scrub: 1,
+        },
+      });
     }
 
     return () => tl.revert();
-  }, [isMobile]); 
+  }, [isMobile]);
 
   const mobileView = (
     <div className="w-full px-[2vw] max-sm:mt-[15vh]" ref={containerRef}>
@@ -138,7 +131,10 @@ function VisitUs() {
         mobileView
       ) : (
         <div className="w-full min-h-screen px-[2vw] mt-[15vh]">
-          <div ref={containerRef} className="imageContainer w-full flex justify-between gap-[2vw]">
+          <div
+            ref={containerRef}
+            className="imageContainer w-full flex justify-between gap-[2vw]"
+          >
             <div ref={leftImgRef} className="left w-[70vw]">
               <img
                 className="w-full object-cover rounded-[2vw]"
@@ -148,7 +144,9 @@ function VisitUs() {
             </div>
             <div className="right w-[30vw] mt-[2vw] flex flex-col gap-[5vw]">
               <div className="text">
-                <h1 ref={visitRef} className="font-[headline] text-[5vw]">Visit Us</h1>
+                <h1 ref={visitRef} className="font-[headline] text-[5vw]">
+                  Visit Us
+                </h1>
                 <p className="font-[light] text-[1.2vw] leading-[1.7vw] w-[30vw] mt-[1.5vw]">
                   25 square meters on London’s famous Bermondsey Street was all
                   it took to conceive WatchHouse and lay the foundations of

@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import API from "../services/api.js";
 import { Link } from "react-router-dom";
 import ProductsHeader from "../ProductsHeader.jsx";
+import gsap from "gsap";
 
 function AllProducts() {
   const [products, setProducts] = useState([]);
@@ -19,6 +20,7 @@ function AllProducts() {
 
     fetchProducts();
   }, []);
+
 
   return (
     <div>

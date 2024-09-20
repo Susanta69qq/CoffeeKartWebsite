@@ -360,7 +360,7 @@ function Favourites() {
         <h1 className="font-[headline] text-[8vw]">Our Favourites.</h1>
         <Link to={"/all-products"}>
           <button
-            className="button uppercase font-[light] tracking-widest 
+            className="button w-full uppercase font-[light] tracking-widest 
         text-[3.4vw] border border-black px-[2vw] py-[1vh] rounded-[5vw] overflow-hidden"
           >
             shop now

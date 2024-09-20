@@ -1,14 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../services/api.js";
 import Footer from "./Footer";
 import { useCart } from "../CartContext.jsx";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const imgRef = useRef(null);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(imgRef.current, {
+      y: 100,
+      duration: 1.5,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: imgRef.current,
+        start: "top 90%",
+        scrub: 2,
+      },
+    })
+  }, [])
+
+  useEffect(() => {
+    gsap.from(textRef.current, {
+      y: 100,
+      duration: 1.5,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: textRef.current,
+        start: "top 90%",
+        scrub: 2,
+      },
+    })
+  }, [])
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -101,12 +133,12 @@ const ProductDetails = () => {
             </div>
           </div>
           <div className="imageDiv px-[3vw] relative mb-[5vh] max-sm:mb-[0.5vh]">
-            <img
+            <img ref={imgRef}
               className="w-full max-sm:h-screen object-cover rounded-[2vw]"
               src="/images/HeroProductDesktop.jpeg"
               alt="Hero Product"
             />
-            <div className="textContent absolute top-0 px-[4vw] py-[10vh] max-sm:py-[2vh]">
+            <div ref={textRef} className="textContent absolute top-0 px-[4vw] py-[10vh] max-sm:py-[2vh]">
               <h1 className="font-[headline] text-[5vw] max-sm:text-[10vw] text-[#2B2B27]">
                 Our approach.
               </h1>

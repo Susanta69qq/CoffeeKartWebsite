@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function ProductsHeader({ title, description }) {
   const [isMobile, setIsMobile] = useState(false);
+  const headerRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,6 +20,20 @@ function ProductsHeader({ title, description }) {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    gsap.fromTo(
+      headerRef.current,
+      { opacity: 0, y: 100 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: "power3.out",
+      }
+    );
+  }, [isMobile]);
 
   const categoryPaths = {
     coffee: "/category/coffee",
@@ -51,7 +70,7 @@ function ProductsHeader({ title, description }) {
         )}
       </div>
       <div className="header w-full flex flex-col gap-[3vh] mt-[5vh]">
-        <h1 className="w-full font-[headline] text-[15.5vw] leading-[16vw]">
+        <h1 ref={headerRef} className="w-full font-[headline] text-[15.5vw] leading-[16vw]">
           {title}
         </h1>
         <p className="font-[light]">{description}</p>
@@ -90,7 +109,7 @@ function ProductsHeader({ title, description }) {
             </div>
           </div>
           <div className="right flex flex-col gap-[2vh]">
-            <h1 className="font-[headline] text-[7vw] leading-[8vw] w-[50vw]">
+            <h1 ref={headerRef} className="font-[headline] text-[7vw] leading-[8vw] w-[50vw]">
               {title}
             </h1>
             <p className="font-[light] w-[45vw]">{description}</p>

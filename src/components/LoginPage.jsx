@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import { AuthContext } from "../AuthContext";
+import gsap from "gsap";
 
 function LoginPage() {
+  const [isMobile, setIsMobile] = useState(false);
+  const loginRef = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,13 +33,41 @@ function LoginPage() {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 640);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    gsap.fromTo(
+      loginRef.current,
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.5,
+      }
+    );
+  }, [isMobile]);
+
   return (
     <div className="w-full min-h-screen bg-[#FCF7E6]">
       <div
         className="login px-[12.5vw] max-sm:px-[4vw] w-[50vw] max-sm:w-full 
       pt-[30vh] max-sm:pt-[5vh] pb-[10vh] max-sm:pb-[3vh]"
       >
-        <h1 className="font-[headline] text-[4vw] max-sm:text-[9vw] text-center mb-[5vh]">
+        <h1 ref={loginRef} className="font-[headline] text-[4vw] max-sm:text-[9vw] text-center mb-[5vh]">
           Login
         </h1>
 
