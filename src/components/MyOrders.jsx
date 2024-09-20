@@ -28,12 +28,12 @@ function MyOrders() {
 
   return (
     <div className="w-full min-h-screen bg-[#FCF7E6]">
-      <div className="px-[2vw] py-[5vh]">
-        <h3 className="font-[headline] text-[3vw] py-[3vh] border-b-[1px] border-gray-600">
+      <div className="px-[2vw] py-[5vh] max-sm:py-[2vh]">
+        <h3 className="font-[headline] text-[3vw] max-sm:text-[7vw] py-[3vh] border-b-[1px] border-gray-600">
           My Orders
         </h3>
         {loading ? ( // Show loading message while fetching
-          <h4 className="font-[medium] text-[2vw] text-gray-600 py-[3vh]">
+          <h4 className="font-[medium] text-[2vw] max-sm:text-[6vw] text-gray-600 py-[3vh]">
             Loading your orders...
           </h4>
         ) : (
@@ -41,13 +41,13 @@ function MyOrders() {
             {error && <h4 className="text-red-500">{error}</h4>}
             {orders.length === 0 ? (
               <div>
-                <h4 className="font-[medium] text-[2vw] text-gray-600 py-[3vh]">
+                <h4 className="font-[medium] text-[2vw] max-sm:text-[6vw] text-gray-600 py-[3vh]">
                   You have not placed any orders yet.
                 </h4>
                 <Link to={"/all-products"}>
                   <button
                     className="button overflow-hidden border-[1px] border-black 
-                  w-[15vw] rounded-[2vw] font-[light] py-[1vh]"
+                  w-[15vw] max-sm:w-full rounded-[2vw] max-sm:rounded-[6vw] font-[light] py-[1vh]"
                   >
                     Visit our products gallery <div className="button-bg"></div>
                   </button>
@@ -57,30 +57,32 @@ function MyOrders() {
               <div>
                 {orders.map((order) => (
                   <div key={order._id}>
-                    <div className="top flex items-center gap-[2vw] py-[2vh] border-b-[1px] border-gray-600">
+                    <div className="top flex items-center gap-[2vw] py-[2vh] border-b-[1px] 
+                    border-gray-600 max-sm:border-green-800">
                       <img
-                        className="w-[15vw]"
+                        className="w-[15vw] max-sm:w-[35vw]"
                         src={order.products[0].product.image}
                         alt=""
                       />
-                      <h1 className="font-[medium] text-[2vw]">
+                      <h1 className="font-[medium] max-sm:w-[37vw] text-[2vw] max-sm:text-[6vw] max-sm:leading-[7vw]">
                         {order.products[0].product.name}
                       </h1>
-                      <p className="font-[light] text-[1vw]">
+                      <p className="font-[light] text-[1vw] max-sm:text-[4vw]">
                         Quantity: {order.products[0].quantity}
                       </p>
                     </div>
-                    <div className="price py-[2vh] border-b-[1px] border-gray-600 flex items-center justify-between">
-                      <p className="font-[light] text-[2.25vw]">
+                    <div className="price py-[2vh] border-b-[1px] border-gray-600 flex max-sm:flex-col 
+                    items-center justify-between max-sm:justify-start max-sm:items-start">
+                      <p className="font-[light] text-[2.25vw] max-sm:text-[5vw]">
                         Total Price: Rs. {order.totalPrice}
                       </p>
-                      <p className="font-[light] text-[1.25vw]">
+                      <p className="font-[light] text-[1.25vw] max-sm:text-[5vw]">
                         Order ID: {order._id}
                       </p>
-                      <p className="font-[light] text-[1vw]">
+                      <p className="font-[light] text-[1vw] max-sm:text-[5vw]">
                         Ordered on: {new Date(order.createdAt).toLocaleDateString()}
                       </p>
-                      <p className="font-[light] text-[1vw]">
+                      <p className="font-[light] text-[1vw] max-sm:text-[5vw]">
                         Time: {new Date(order.createdAt).toLocaleTimeString()}
                       </p>
                     </div>

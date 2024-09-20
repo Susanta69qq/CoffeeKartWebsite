@@ -66,7 +66,7 @@ function Account() {
                   className="font-[headline] text-[2.75vw] max-sm:text-[5.5vw] max-sm:opacity-100 opacity-25 transition-opacity 
                 duration-300 hover:opacity-100 
                 hover:border-b-[2px] hover:border-b-black cursor-pointer"
-                  to={item === "My Orders." ? "/my-orders" : "/"} // Change this line
+                  to={item === "My Orders." ? "/my-orders" : null} // Change this line
                   onClick={item === "Logout" ? handleLogout : undefined}
                 >
                   {item}
