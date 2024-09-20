@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useCart } from "../CartContext.jsx";
 import { AuthContext } from "../AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +8,13 @@ function Navbar() {
   const [menuToggle, setMenuToggle] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
   const [isMobile, setIsMobile] = useState(null);
-  const [isCoffeeHovered, setIsCoffeeHovered] = useState(false);
-  const [isEquipmentHovered, setIsEquipmentHovered] = useState(false);
+  // const [isCoffeeHovered, setIsCoffeeHovered] = useState(false);
+  // const [isEquipmentHovered, setIsEquipmentHovered] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
   const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { cart, removeFromCart, cartItemCount, totalPrice } = useCart();
 
@@ -53,6 +54,11 @@ function Navbar() {
       navigate("/login");
     }
   };
+
+  useEffect(() => {
+    setMenuToggle(false);
+    setCartOpen(false);
+  }, [location]);
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -97,18 +103,15 @@ function Navbar() {
           <div className="border-b-[1px] border-[#000] max-sm:mt-[2vh]"></div>
           <div className="contents">
             {[
-              "All products",
-              "Subscribe",
-              "Coffee",
-              "Equipment",
-              "Locations",
+              { label: "All products", path: "/all-products" },
+              { label: "Subscribe", path: "" },
+              { label: "Coffee", path: "/category/coffee" },
+              { label: "Equipment", path: "/category/equipment" },
+              { label: "Locations", path: "" },
             ].map((item, index) => (
               <div key={index} className="max-sm:py-[2vh]">
-                <Link
-                  to={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="font-[medium]"
-                >
-                  {item}
+                <Link to={item.path} className="font-[medium]">
+                  {item.label}
                 </Link>
                 <div className="border-b-[1px] border-[#000] max-sm:mt-[2vh] opacity-20"></div>
               </div>
@@ -195,18 +198,18 @@ function Navbar() {
         >
           <div className="flex items-center">
             {[
-              "All products",
-              "Subscribe",
-              "Coffee",
-              "Equipment",
-              "Locations",
+              { label: "All products", path: "/all-products" },
+              { label: "Subscribe", path: "" },
+              { label: "Coffee", path: "/category/coffee" },
+              { label: "Equipment", path: "/category/equipment" },
+              { label: "Locations", path: "" },
             ].map((item, index) => (
               <div key={index} className="relative">
                 <Link
-                  to={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  to={item.path}
                   className="links font-[medium] mr-[2vw] transition-transform ease-in-out duration-500"
                 >
-                  {item}
+                  {item.label}
                 </Link>
               </div>
             ))}
