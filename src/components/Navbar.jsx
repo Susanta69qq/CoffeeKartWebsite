@@ -19,8 +19,9 @@ function Navbar() {
 
   const toggleCartMenu = () => {
     setCartOpen(!cartOpen);
+    if(menuToggle) setMenuToggle(false);
   };
-
+  
   const toggleMenu = () => {
     setMenuToggle(!menuToggle);
     if (cartToggle) setCartToggle(false);
@@ -168,7 +169,10 @@ function Navbar() {
             alt="User Icon"
           />
         </span>
-        <img className="max-sm:w-[6vw]" src="./images/cart.svg" alt="" />
+        <span onClick={toggleCartMenu}>
+          <img className="max-sm:w-[6vw]" src="./images/cart.svg" alt="" />
+        </span>
+        
       </div>
     </div>
   );
@@ -239,25 +243,27 @@ function Navbar() {
       )}
 
       <div
-        className={`cartDiv w-[45vw] min-h-[100vh] overflow-y-auto bg-[#FCF7E6] fixed top-0 right-0 
+        className={`cartDiv w-[45vw] max-sm:w-[100vw] min-h-[100vh] overflow-y-auto bg-[#FCF7E6] fixed top-0 right-0
+          
                 rounded-[2vw] z-[10] px-[3vw] py-[6vh] flex flex-col justify-between 
                 transition-all duration-500 ease-in-out ${
-                  cartOpen ? "right-0" : "right-[-50vw]"
+                  cartOpen ? "right-0 max-sm:right-0" : "right-[-50vw] max-sm:right-[-100vw]"
                 }`}
       >
         <div className="top">
           <div className="topText flex items-center justify-between">
-            <h1 className="font-[headline] text-[3vw]">Your Cart</h1>
+            <h1 className="font-[headline] text-[3vw] max-sm:text-[6vw]">Your Cart</h1>
             <p
               onClick={toggleCartMenu}
-              className="font-[light] uppercase text-[0.9vw] tracking-[2px] 
+              className="font-[light] uppercase text-[0.9vw] max-sm:text-[3vw] tracking-[2px] 
                     underline underline-offset-[0.5vh] cursor-pointer"
             >
               close
             </p>
           </div>
-          <div className="delivery mt-[5vh] border-[1px] border-black rounded-[2vw]">
-            <h2 className="font-[light] uppercase text-[.95vw] px-[1.5vw] py-[2vh] tracking-[2px]">
+          <div className="delivery mt-[5vh] border-[1px] border-black rounded-[2vw] max-sm:rounded-[6vw]">
+            <h2 className="font-[light] uppercase text-[.95vw] max-sm:text-[3vw] px-[1.5vw] max-sm:px-[5vw] 
+            py-[2vh] tracking-[2px]">
               Delivery Information
             </h2>
           </div>
@@ -268,13 +274,14 @@ function Navbar() {
             {cart.length === 0 ? (
               <div className="bottomCartContent">
                 <div className="border border-t-[1px] border-black"></div>
-                <h1 className="font-[headline] text-[2.75vw]">
+                <h1 className="font-[headline] text-[2.75vw] max-sm:text-[6vw] max-sm:py-[1.5vh]">
                   Your cart is currently empty.
                 </h1>
                 <Link to={"/all-products"}>
                   <button
-                    className="button w-full mt-[3.5vh] uppercase text-[0.9vw] tracking-[2px] 
-                   border border-black py-[1.3vh] rounded-[2vw] overflow-hidden"
+                    className="button w-full mt-[3.5vh] max-sm:mt-[1.5vh] uppercase text-[0.9vw] max-sm:text-[3vw] 
+                    tracking-[2px] 
+                   border border-black py-[1.3vh] rounded-[2vw] max-sm:rounded-[6vw ] overflow-hidden"
                   >
                     shop now
                     <div className="button-bg"></div>
@@ -282,23 +289,24 @@ function Navbar() {
                 </Link>
               </div>
             ) : (
-              <div className="flex flex-col gap-[2vw]">
+              <div className="flex flex-col gap-[2vw] max-sm:gap-[5vw]">
                 {cart.map((item) => (
                   <div
                     key={item.product._id}
                     className="cart-item flex flex-col gap-[2vw] 
-                  border-t-[1px] border-gray-600 py-[2vh]"
+                  border-t-[1px] border-gray-600 py-[2vh] max-sm:py-[1vh]"
                   >
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center max-sm:flex-col">
                       <img
-                        className="w-[10vw]"
+                        className="w-[10vw] max-sm:w-[50vw]"
                         src={item.product.image}
                         alt=""
                       />
-                      <h2 className="font-[medium] w-[10vw] text-[1.35vw]">
+                      <h2 className="font-[medium] w-[10vw] max-sm:w-full text-[1.35vw] 
+                      max-sm:text-[8vw] max-sm:text-center">
                         {item.product.name}
                       </h2>
-                      <p className="font-[light] text-[.95vw]">
+                      <p className="font-[light] text-[.95vw] max-sm:text-[4vw]">
                         Quantity: {item.quantity}
                       </p>
                     </div>
@@ -320,14 +328,14 @@ function Navbar() {
                   className="totalPrice mt-[2vh] flex justify-between items-center border-t-[1px] 
                 border-black pt-[2vh]"
                 >
-                  <h2 className="font-[medium] text-[1.35vw]">Total Price:</h2>
-                  <p className="font-[medium] text-[1.3vw]">Rs. {totalPrice}</p>
+                  <h2 className="font-[medium] text-[1.35vw] max-sm:text-[5vw]">Total Price:</h2>
+                  <p className="font-[medium] text-[1.3vw] max-sm:text-[5vw]">Rs. {totalPrice}</p>
                 </div>
 
                 <button
                   onClick={handleProceedCheckout}
-                  className="button w-full mt-[3.5vh] uppercase text-[0.9vw] tracking-[2px] 
-     border border-black py-[1.3vh] rounded-[2vw] overflow-hidden"
+                  className="button w-full mt-[3.5vh] uppercase text-[0.9vw] max-sm:text-[3vw] tracking-[2px] 
+     border border-black py-[1.3vh] rounded-[2vw] max-sm:rounded-[6vw] overflow-hidden"
                 >
                   Proceed to Checkout
                   <div className="button-bg"></div>
