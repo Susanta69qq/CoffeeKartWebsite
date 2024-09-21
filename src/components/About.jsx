@@ -124,12 +124,166 @@ function About() {
     },
   ];
 
+  const mobileView = (
+    <div className="w-full min-h-screen bg-[#FCF7E6] pb-[5vh] mt-[-25vh]">
+      <div className="about flex justify-between bg-[#F5F0DF] px-[2vw] py-[5vh]">
+        <Swiper slidesPerView={1}>
+          <SwiperSlide>
+            <div className="farmer flex items-center justify-between">
+              <img className="w-[20vw]" src="./images/farmer.svg" alt="" />
+              <div className="text flex flex-col gap-[3vw]">
+                <div
+                  ref={headlineRef}
+                  className="header font-[headline] text-[5vw] leading-[5vw]"
+                >
+                  <h1>Globally sourced.</h1>
+                  <h1>Locally crafted.</h1>
+                </div>
+                <div className="details font-[light] text-[4vw] leading-[4.5vw]">
+                  <p>
+                    Cupped, tested, developed and roasted <br />
+                    at out Coffee Lab right here in South <br />
+                    London.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div className="lab flex items-center justify-between">
+              <img className="w-[20vw]" src="./images/labtest.svg" alt="" />
+              <div className="text flex flex-col gap-[3vw]">
+                <div className="header font-[headline] text-[5vw] leading-[5vw]">
+                  <h1>Modern Coffee.</h1>
+                  <h1>Holistic Approach.</h1>
+                </div>
+                <div className="details font-[light] text-[4vw] leading-[4.5vw]">
+                  <p>
+                    It encapsulates the attention to detail, <br />
+                    creativity, and focus on provenance and <br />
+                    quality.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div className="aroma flex items-center justify-between">
+              <img className="w-[20vw]" src="./images/aroma.svg" alt="" />
+              <div className="text flex flex-col gap-[3vw]">
+                <div className="header font-[headline] text-[5vw] leading-[5vw]">
+                  <h1>Twenty Houses, no two</h1>
+                  <h1>the same.</h1>
+                </div>
+                <div className="details font-[light] text-[4vw] leading-[4.5vw]">
+                  <p>
+                    Each of our loactions are designed to <br />
+                    play a contemporary role in the Modern <br />
+                    Coffee experience.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        </Swiper>
+      </div>
+      <div className="header flex flex-col gap-[2vh] px-[2vw] mt-[5vh]">
+        <div ref={headlineRef} className="head">
+          <h1 className="font-[headline] text-[8vw] leading-[8vw]">
+            Subscribe
+          </h1>
+          <h1 className="font-[headline] text-[8vw] leading-[8vw]">today.</h1>
+        </div>
+        <div className="headText flex flex-col gap-[3.5vh]">
+          <h2 className="font-[light]">
+            WatchHouse. YourHouse. <br />
+            The Modern Coffee experience in the comfort of your own home.
+          </h2>
+          <h2 className="font-[light]">Subscribe for a neverending cup.</h2>
+          <div className="toggleButton font-[medium] flex gap-[3vw] items-center">
+            <h3 className="font-[medium]">Coffee</h3>
+            <div
+              onClick={() => toggleProducts()}
+              className="w-[15vw] h-[3vh] border-[1px] border-black rounded-[3vw] relative"
+            >
+              <div
+                className={`w-[3.5vw] h-[2vh] bg-black rounded-full 
+                transition-transform duration-500 absolute top-[0.5vh] left-[0.6vw] ${
+                  !showProducts ? "translate-x-[9.5vw]" : "translate-x-0"
+                }`}
+              ></div>
+            </div>
+            <h3 className="font-[medium]">Pods</h3>
+          </div>
+        </div>
+      </div>
+      <div className="productsSection w-full px-[4vw] mt-[10vh] flex justify-between gap-[2.5vw]">
+        <div
+          className={`products w-full flex gap-[2.5vw] transition-all duration-500 ease-in-out
+              ${showProducts ? "opacity-100 translate-y-0" : "translate-y-5"}`}
+        >
+          <Swiper slidesPerView={1} spaceBetween={-30}>
+            {(showProducts ? products : pods).map((product, index) => (
+              <SwiperSlide>
+                <div
+                  key={index}
+                  className={`relative w-[80vw] px-[4vw] flex flex-col gap-[3vw] py-[2vh] rounded-[4vw] pt-[15vh]
+      ${
+        product.name === "Roaster's Spotlight Subscription"
+          ? "bg-[#B27A75] text-[#FCF7E6]"
+          : index === 1 && !showProducts
+          ? "bg-[#F3EDDB]"
+          : "bg-[#CFB192]"
+      }`}
+                >
+                  <img
+                    className="fixed top-[-15vh] left-0"
+                    src={product.image}
+                    alt=""
+                  />
+                  <h1 className="font-[headline] text-[4vw] leading-[4vw]">
+                    {product.name}
+                  </h1>
+                  <p className="font-[light] text-[4.05vw] leading-[4.5vw]">
+                    {product.details}
+                  </p>
+                  <p className="font-[light] text-[4vw]">{product.price}</p>
+                  <div className="mt-[2vh]">
+                    <div className="border-[1px] border-black"></div>
+                    <h3 className="font-[medium] mb-[2vh]">Subscribe today</h3>
+                    <div className="promises font-[light] text-[4vw] flex flex-col gap-[2vw]">
+                      <p>Free UK shipping. ✔</p>
+                      <p>Always 10% off. ✔</p>
+                      <p>Pause, skip or cancel at any time. ✔</p>
+                    </div>
+                    <button
+                      className=" button mt-[4vh] w-full bg-[#FCF7E6] rounded-[4vw]
+          uppercase font-[light] text-[3vw] tracking-[2px] py-[1vh] overflow-hidden"
+                    >
+                      Check Out
+                      <span className="button-bg"></span>
+                    </button>
+                    <h4 className="font-[light] text-[3.5vw] text-center tracking-[2px] mt-[2vh]">
+                      SAVE 10%
+                    </h4>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div>
       {isMobile ? (
         mobileView
       ) : (
-        <div className="w-full min-h-screen bg-[#FCF7E6] pb-[5vh] overflow-hidden">
+        <div className="w-full min-h-screen bg-[#FCF7E6] pb-[5vh]">
           <div className="about flex justify-between bg-[#F5F0DF] px-[2vw] py-[5vh]">
             <div className="farmer flex items-center gap-[1vw]">
               <img className="w-[6vw]" src="./images/farmer.svg" alt="" />
@@ -187,7 +341,7 @@ function About() {
           </div>
           <div className="productsSection w-full px-[2vw] mt-[30vh] flex justify-between gap-[2.5vw]">
             <div className="header flex flex-col gap-[3.5vh]">
-              <div className="head">
+              <div ref={headlineRef} className="head">
                 <h1 className="font-[headline] text-[4vw] leading-[4vw]">
                   Subscribe
                 </h1>
