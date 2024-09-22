@@ -331,7 +331,11 @@ function Favourites() {
         },
       }
     );
-  }, []);
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [isMobile]);
 
   const productsPerPage = 3;
   const maxIndex = products.length - productsPerPage;
@@ -355,9 +359,11 @@ function Favourites() {
   };
 
   const mobileView = (
-    <div className="w-full min-h-screen bg-[#FCF7E6] relative">
-      <div className="header pt-[15vh] flex flex-col mb-[5vh] px-[2vw] gap-[2vh]">
-        <h1 className="font-[headline] text-[8vw]">Our Favourites.</h1>
+    <div className="w-full bg-[#FCF7E6] relative">
+      <div className="header pt-[5vh] flex flex-col mb-[5vh] px-[2vw] gap-[2vh]">
+        <h1 ref={headerRef} className="font-[headline] text-[8vw]">
+          Our Favourites.
+        </h1>
         <Link to={"/all-products"}>
           <button
             className="button w-full uppercase font-[light] tracking-widest 

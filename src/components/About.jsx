@@ -43,55 +43,55 @@ function About() {
     return () => window.removeEventListener("resize", resizeHandler);
   }, []);
 
-  // useEffect(() => {
-  //   gsap.fromTo(
-  //     headlineRef.current.querySelectorAll("h1"),
-  //     {
-  //       opacity: 0,
-  //       y: 100,
-  //     },
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       duration: 1,
-  //       ease: "power3.out",
-  //       stagger: 0.3,
-  //       scrollTrigger: {
-  //         trigger: headlineRef.current,
-  //         start: "top 90%",
-  //       },
-  //     }
-  //   );
+  useEffect(() => {
+    gsap.fromTo(
+      headlineRef.current.querySelectorAll("h1"),
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: headlineRef.current,
+          start: "top 90%",
+        },
+      }
+    );
 
-  //   return () => {
-  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  //   };
-  // }, []);
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
-  // useEffect(() => {
-  //   gsap.fromTo(
-  //     productsRef.current.querySelectorAll(".products > div"),
-  //     {
-  //       opacity: 0,
-  //       y: 100,
-  //     },
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       duration: 1,
-  //       ease: "power3.out",
-  //       stagger: 0.3,
-  //       scrollTrigger: {
-  //         trigger: productsRef.current,
-  //         start: "top 90%",
-  //       },
-  //     }
-  //   );
+  useEffect(() => {
+    gsap.fromTo(
+      productsRef.current.querySelectorAll(".products > div"),
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: productsRef.current,
+          start: "top 90%",
+        },
+      }
+    );
 
-  //   return () => {
-  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  //   };
-  // }, []);
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   const toggleProducts = () => {
     setShowProducts(!showProducts);
@@ -221,15 +221,16 @@ function About() {
       </div>
       <div className="productsSection w-full px-[4vw] mt-[10vh] flex justify-between gap-[2.5vw]">
         <div
-          className={`products w-full flex gap-[2.5vw] transition-all duration-500 ease-in-out
+          className={`products relative w-full flex gap-[2.5vw] transition-all duration-500 ease-in-out
               ${showProducts ? "opacity-100 translate-y-0" : "translate-y-5"}`}
         >
           <Swiper slidesPerView={1} spaceBetween={-30}>
             {(showProducts ? products : pods).map((product, index) => (
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <div
                   key={index}
-                  className={`relative w-[80vw] px-[4vw] flex flex-col gap-[3vw] py-[2vh] rounded-[4vw] pt-[15vh]
+                  className={` w-[80vw] px-[4vw] flex flex-col items-center gap-[3vw] py-[2vh]
+                     rounded-[4vw] pt-[20vh]
       ${
         product.name === "Roaster's Spotlight Subscription"
           ? "bg-[#B27A75] text-[#FCF7E6]"
@@ -239,7 +240,7 @@ function About() {
       }`}
                 >
                   <img
-                    className="fixed top-[-15vh] left-0"
+                    className="absolute top-[-6vh]"
                     src={product.image}
                     alt=""
                   />
@@ -374,7 +375,7 @@ function About() {
                 </div>
               </div>
             </div>
-            <div
+            <div ref={productsRef}
               className={`products w-full flex gap-[2.5vw] transition-all duration-500 ease-in-out
               ${showProducts ? "opacity-100 translate-y-0" : "translate-y-5"}`}
             >

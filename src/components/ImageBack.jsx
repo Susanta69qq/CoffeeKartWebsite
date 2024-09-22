@@ -14,14 +14,14 @@ function ImageBack() {
     const resizeHandler = () => {
       setIsMobile(window.innerWidth <= 640);
     };
-  
+
     resizeHandler(); // Set initial value based on current window size
-  
+
     window.addEventListener("resize", resizeHandler);
-  
+
     return () => window.removeEventListener("resize", resizeHandler);
   }, []);
-  
+
   useEffect(() => {
     // Animation for imgRef, applies to both mobile and desktop
     gsap.to(imgRef.current, {
@@ -34,8 +34,8 @@ function ImageBack() {
         scrub: 1,
       },
     });
-  }, []);
-  
+  }, [isMobile]);
+
   useEffect(() => {
     // Animation for elementRef, only for non-mobile devices
     if (!isMobile) {
@@ -52,10 +52,10 @@ function ImageBack() {
     } else {
       // Clean up animation if on mobile
       gsap.killTweensOf(elementRef.current);
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     }
   }, [isMobile]);
-  
+
   useEffect(() => {
     // Animation for layoverRef, only for non-mobile devices
     if (!isMobile) {
@@ -75,7 +75,7 @@ function ImageBack() {
     } else {
       // Clean up animation if on mobile
       gsap.killTweensOf(layoverRef.current.querySelectorAll("h1"));
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     }
   }, [isMobile]);
 
@@ -92,7 +92,7 @@ function ImageBack() {
           ref={elementRef}
           className="elements absolute 
         flex flex-col gap-[8vw] max-sm:gap-[8vh] w-full h-full top-[30vh] 
-        max-sm:top-[25vh] items-center justify-center px-[6vw]"
+        max-sm:top-[2vh] items-center justify-center px-[6vw]"
         >
           <div className="header relative text-center">
             <div className="text-area white-space-nowrap">

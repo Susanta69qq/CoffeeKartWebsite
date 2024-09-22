@@ -3,11 +3,11 @@ import Footer from "./Footer";
 import API from "../services/api.js";
 import { Link } from "react-router-dom";
 import ProductsHeader from "../ProductsHeader.jsx";
-import gsap from "gsap";
 
 function AllProducts() {
   const [products, setProducts] = useState([]);
-  const [visibleProducts, setVisibleProducts] = useState([]); // New state for visible products
+  const [visibleProducts, setVisibleProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,8 +21,11 @@ function AllProducts() {
             setVisibleProducts((prev) => [...prev, product]); // Add product to visible state
           }, index * 100); // Delay each product by 100ms
         });
+
+        setLoading(false); // Set loading to false once products are fetched
       } catch (error) {
         console.error("Error fetching products:", error);
+        setLoading(false); // Ensure loading is set to false in case of an error
       }
     };
 
@@ -38,7 +41,11 @@ function AllProducts() {
             "Find a compilation of all our coffee, equipment and gifting ideas in one place"
           }
         />
-        <Link>
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[50vh]">
+            <h2 className="text-xl font-semibold">Loading products...</h2>
+          </div>
+        ) : (
           <div className="products grid grid-cols-3 max-sm:grid-cols-1 gap-[3vw] max-sm:gap-[2vw] items-start mt-[10vh] max-sm:mt-[2vh]">
             {visibleProducts.map((product) => (
               <Link to={`/products/${product._id}`} key={product._id}>
@@ -84,7 +91,7 @@ function AllProducts() {
               </Link>
             ))}
           </div>
-        </Link>
+        )}
       </div>
       <Footer />
     </div>
